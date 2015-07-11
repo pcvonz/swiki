@@ -1,7 +1,7 @@
 import urllib2
 from bs4 import BeautifulSoup
 import re
-import codecs
+#import codecs
 import json
 from flask import Flask
 from flask import render_template
@@ -34,9 +34,9 @@ def grab_random_article():
     
     wiki_json = json.JSONEncoder(ensure_ascii = False).encode(wiki_page)
     
-    f = codecs.open('wiki_page', 'w', "utf-8")
-    f.write(wiki_json)
-    f.close()
+    #f = codecs.open('wiki_page', 'w', "utf-8")
+    #f.write(wiki_json)
+    #f.close()
     
     
     return wiki_json
