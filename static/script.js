@@ -3,13 +3,17 @@ var data;
 var font = 0
 time = new Date().getTime() / 1000;
 var sidebar;
+var language = "es";
 function draw() {    
+    //If current index is undefined then the end of the article has been reached.
+    //Grab another article.
     if(window.variable[n] == undefined) {
             window.cancelAnimationFrame(draw);
             getJson();
         } else {
-            var speed = document.getElementById('speed').value
+            var textSpeed = document.getElementById('speed').value
             curr_time = new Date().getTime() / 1000;
+            deltaTime = curr_time - time;
             var canvas = document.getElementById('Wikipedia');
             if(canvas.getContext){
                 //Set up canvas
@@ -21,9 +25,8 @@ function draw() {
                 var y = canvas.height / 2;
                 
                 
-                //Side bar
-                if((curr_time-time) > .5) {
-                    console.log("there");
+                //Side bar 
+                if((deltaTime) > .5) {
                     $( window ).mousemove(function( event ) {
                         if(event.pageX < 200) {
                             menuPopOut();
@@ -33,7 +36,8 @@ function draw() {
                     });
                 }
                 
-                if((curr_time-time) > (.1 / speed)) {
+                //Render wikipedia text
+                if((deltaTime) > (.1 / textSpeed)) {
                     //clear canvas and set it to size of the window
                     width = $( window ).width();
                     width = width - (width * .01);
@@ -42,6 +46,8 @@ function draw() {
                     canvas.height = height;
                     canvas.style.width = width;
                     canvas.style.height = height;
+                    
+                    //Set the canvas background to black
                     ctx.fillRect(0, 0, width, height)
                     
                     
@@ -67,8 +73,16 @@ function menuPopOut() {
 function menuPopIn() {
     window.sidebar.style.right = "170px" ;
 }
+
+//Grabs wikipedia article from flask server
 function getJson() {
-    $.getJSON('http://127.0.0.1:5000/grab_article',
+    if(language == "en") {
+        var url = 'http://127.0.0.1:5000/grab_article_en';
+    } else if(language == "es") {
+        var url = 'http://127.0.0.1:5000/grab_article_es';
+    }
+        
+    $.getJSON(url,
     function(data, textStatus, jqXHR) {
         window.variable = data;
         window.sidebar = document.getElementById('relative_sidebar');
@@ -84,4 +98,3 @@ function start() {
     }
 
 window.onload = getJson;
-window.DOMContentLoaded = start;
