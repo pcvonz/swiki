@@ -1,17 +1,27 @@
-.vertical-box {
-  display: flex;
-  height: 1024;
-  width: 1024;
-  flex-flow: column;
+html {
+    background-color: black
 }
-.horizontal-box {
-  display: flex;
-  flex-flow: row;
+
+body {
+    overflow: hidden;
 }
-.spacer {
-  flex: auto;
+canvas#Wikipedia {
+    float:right;
 }
-.centered-element {
-  flex: none;
-  background-color: white;
+
+#speed {
+    position: relative;
+}
+
+#relative_sidebar {
+    position: relative;
+    background-color: white;
+    top: -440px;
+    right: 170px;
+}
+
+#sidebar {
+    width: 1%;
+    color: white;
+    float: left;
 }
