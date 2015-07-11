@@ -4,14 +4,21 @@
     <title>SWiki</title>
     <link href="../static/style.css" rel="stylesheet">
 </head>
-<body onload="getJson();">
+<body>
     <script src="../static/jquery-2.1.4.js"></script>
     <script src="../static/script.js"></script>
-
-    </script>
-    <canvas id="Wikipedia" width="500" height="500"></canvas>
     
-    <p id="container">
-    </p>
+    <div class="vertical-box">
+        <div class="spacer"></div>
+        <div class="centered-element horizontal-box">
+            <div class="spacer"></div>
+            <div class="centered-element">
+                <canvas id="Wikipedia"></canvas>
+                <input id="speed" type="range" min=".05" max="1" step=".05"/>
+            </div>
+            <div class="spacer"></div>
+        </div>
+    <div class="spacer"></div>
+    </div>
 </body>
 </html>
