@@ -1,10 +1,9 @@
 var n = 0;
 var data;
 var font = 0
-
 time = new Date().getTime() / 1000;
-
-function draw() {
+var sidebar;
+function draw() {    
     if(window.variable[n] == undefined) {
             window.cancelAnimationFrame(draw);
             getJson();
@@ -14,9 +13,7 @@ function draw() {
             var canvas = document.getElementById('Wikipedia');
             if(canvas.getContext){
                 //Set up canvas
-                
-                console.log($( window ).height());
-                
+                                
                 var ctx = canvas.getContext('2d');
                
                 //get window height
@@ -24,19 +21,36 @@ function draw() {
                 var y = canvas.height / 2;
                 
                 
+                //Side bar
+                if((curr_time-time) > .5) {
+                    console.log("there");
+                    $( window ).mousemove(function( event ) {
+                        if(event.pageX < 200) {
+                            menuPopOut();
+                        } else {
+                            menuPopIn();
+                        }
+                    });
+                }
+                
                 if((curr_time-time) > (.1 / speed)) {
                     //clear canvas and set it to size of the window
-                    canvas.width = $( window ).width();
-                    canvas.height = $( window ).height();
-                    canvas.style.width = $( window ).width().toString();
-                    canvas.style.height = $( window ).height().toString();
+                    width = $( window ).width();
+                    width = width - (width * .01);
+                    height = $( window ).height();
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvas.style.width = width;
+                    canvas.style.height = height;
+                    ctx.fillRect(0, 0, width, height)
+                    
                     
                     //Calculate appropriate font size
                     font = ($( window ).height() / 5).toString() + "px sans";
-                    console.log(font);
                     
                     ctx.font = font;
                     ctx.textAlign = 'center';
+                    ctx.fillStyle = "#e5e5e5"
                     ctx.fillText(window.variable[n], x, y);
                     n++;
                     time = new Date().getTime() / 1000;
@@ -46,15 +60,28 @@ function draw() {
     }
 }
 
+function menuPopOut() {
+    window.sidebar.style.right = "0px" ;
+}
 
+function menuPopIn() {
+    window.sidebar.style.right = "170px" ;
+}
 function getJson() {
-    $.getJSON('http://127.0.0.1:5000/grab_article', 
+    $.getJSON('http://127.0.0.1:5000/grab_article',
     function(data, textStatus, jqXHR) {
         window.variable = data;
+        window.sidebar = document.getElementById('relative_sidebar');
+
         draw();
     }
     
 )
 };
 
+function start() {
+    sidebar = document.getElementById('relative_sidebar');
+    }
+
 window.onload = getJson;
+window.DOMContentLoaded = start;
