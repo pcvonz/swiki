@@ -3,7 +3,7 @@ var data;
 var font = 0
 time = new Date().getTime() / 1000;
 var sidebar;
-var language = "es";
+var language = "en";
 function draw() {    
     //If current index is undefined then the end of the article has been reached.
     //Grab another article.
@@ -15,6 +15,10 @@ function draw() {
             curr_time = new Date().getTime() / 1000;
             deltaTime = curr_time - time;
             var canvas = document.getElementById('Wikipedia');
+            
+//             console.log(window.sidebar.style.width);
+            
+            
             if(canvas.getContext){
                 //Set up canvas
                                 
@@ -24,17 +28,6 @@ function draw() {
                 var x = canvas.width / 2;
                 var y = canvas.height / 2;
                 
-                
-                //Side bar 
-                if((deltaTime) > .5) {
-                    $( window ).mousemove(function( event ) {
-                        if(event.pageX < 200) {
-                            menuPopOut();
-                        } else {
-                            menuPopIn();
-                        }
-                    });
-                }
                 
                 //Render wikipedia text
                 if((deltaTime) > (.1 / textSpeed)) {
@@ -52,7 +45,7 @@ function draw() {
                     
                     
                     //Calculate appropriate font size
-                    font = ($( window ).height() / 5).toString() + "px sans";
+                    font = ($( window ).width() / 10).toString() + "px sans";
                     
                     ctx.font = font;
                     ctx.textAlign = 'center';
@@ -66,14 +59,6 @@ function draw() {
     }
 }
 
-function menuPopOut() {
-    window.sidebar.style.right = "0px" ;
-}
-
-function menuPopIn() {
-    window.sidebar.style.right = "170px" ;
-}
-
 //Grabs wikipedia article from flask server
 function getJson() {
     if(language == "en") {
@@ -85,7 +70,7 @@ function getJson() {
     $.getJSON(url,
     function(data, textStatus, jqXHR) {
         window.variable = data;
-        window.sidebar = document.getElementById('relative_sidebar');
+        window.sidebar = document.getElementById('sidebar');
 
         draw();
     }
