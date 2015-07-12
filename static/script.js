@@ -1,22 +1,31 @@
-var n = 0;
+var n = 1;
 var data;
 var font = 0
 time = new Date().getTime() / 1000;
 var sidebar;
 var language = "en";
+var currentLanguage = "en";
 function draw() {    
     //If current index is undefined then the end of the article has been reached.
     //Grab another article.
     if(window.variable[n] == undefined) {
             window.cancelAnimationFrame(draw);
             getJson();
-        } else {
-            var textSpeed = document.getElementById('speed').value
+    }
+    else if(currentLanguage != language) {
+        currentLanguage = language;
+        console.log("lang " + language);
+        console.log("cur " +currentLanguage);
+        getJson();
+    } else {
+            var textSpeed = document.getElementById('speed').value;
+            currentLanguage = language;
+            language = document.getElementById('language-selector').value;
             curr_time = new Date().getTime() / 1000;
             deltaTime = curr_time - time;
             var canvas = document.getElementById('Wikipedia');
             
-//             console.log(window.sidebar.style.width);
+            console.log(window.variable[0]);
             
             
             if(canvas.getContext){
@@ -71,7 +80,7 @@ function getJson() {
     function(data, textStatus, jqXHR) {
         window.variable = data;
         window.sidebar = document.getElementById('sidebar');
-
+        document.getElementById("article_title").innerHTML= data[0];
         draw();
     }
     
