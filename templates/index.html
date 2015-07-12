@@ -11,8 +11,22 @@
     <canvas id="Wikipedia"></canvas>
     
     <div id="sidebar">
-        <div id="relative_sidebar">
-            <input id="speed" type="range" min=".05" max="1" step=".05"/>
-        </div>
+            <h1 id="article_title"></h1>
+            
+            <div class="container-left">
+                <div class="menu">
+                    Language
+                    <br />
+                    Speed
+                    
+                </div>
+            </div>
+            <div class="container-right">
+                <select id="language-selector">
+                    <option value="en">en</option>
+                    <option value="es">es</option>
+                </select>
+                <input id="speed" type="range" min=".05" max="1" step=".05"/>
+            </div>
     </div>
 </body>
