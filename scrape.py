@@ -12,8 +12,9 @@ app = Flask(__name__)
 @app.route('/grab_article_en')
 def grab_random_article():
     wiki_page = BeautifulSoup(urllib2.urlopen('http://en.wikipedia.org/wiki/Special:Random').read())
+    header = wiki_page.find("h1")
     wiki_page = wiki_page.findAll(id='mw-content-text')
-    
+
     #converting bs4 result set to unicode
     wiki_page = unicode.join(u'\n',map(unicode, wiki_page))
     
@@ -34,7 +35,7 @@ def grab_random_article():
 
     #Removing space characters from wiki_page list
     wiki_page = wiki_page.split(" ")
-    wiki_page_new = []
+    wiki_page_new = [header.string]
     for i in range(0, len(wiki_page)):
         if wiki_page[i] != "":
             wiki_page_new.append(wiki_page[i])
@@ -51,6 +52,7 @@ def grab_random_article():
 @app.route('/grab_article_es')
 def grab_random_article_es():
     wiki_page = BeautifulSoup(urllib2.urlopen('https://es.wikipedia.org/wiki/Especial:Aleatoria').read())
+    header = wiki_page.find("h1")
     wiki_page = wiki_page.findAll(id='mw-content-text')
     
     #converting bs4 result set to unicode
@@ -73,7 +75,7 @@ def grab_random_article_es():
 
     #Removing space characters from wiki_page list
     wiki_page = wiki_page.split(" ")
-    wiki_page_new = []
+    wiki_page_new = [header.string]
     for i in range(0, len(wiki_page)):
         if wiki_page[i] != "":
             wiki_page_new.append(wiki_page[i])
@@ -85,7 +87,7 @@ def grab_random_article_es():
     #f.close()
     
     
-    return wiki_json
+    return wiki_json,
 
 @app.route('/')
 def main_page(name=None):
