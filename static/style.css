@@ -9,19 +9,48 @@ canvas#Wikipedia {
     float:right;
 }
 
-#speed {
-    position: relative;
-}
-
-#relative_sidebar {
+/*#relative_sidebar {
     position: relative;
     background-color: white;
-    top: -440px;
-    right: 170px;
-}
+    width:300px;
+    right: 300px;
+}*/
 
 #sidebar {
-    width: 1%;
-    color: white;
+    position:absolute;
+    background-color: black;
+    transition:property: left-background-color;
+    transition-duration: 1s;
     float: left;
+    height:100%;
+    left:-300px;
+}
+
+#sidebar:hover {
+    transition-property: left, background-color;
+    transition-duration:1s;
+    background-color: white;
+    left:0px;
+}
+
+h1 {
+    font: 20px "Linux Libertine O", serif;
+    margin: 2px 6px 5px 9px;
+    padding: 0px 6px 0px 1px;
+}
+
+.container-left {
+    width:30%;
+    float:left;
+    text-align: right;
+}
+.container-right {
+    width:20%;
+    float: left;
+    margin-left:14px;
+}
+
+.menu {
+        font: 18px "Source Sans Pro", sans;
+    font-weight: 100;
 }
