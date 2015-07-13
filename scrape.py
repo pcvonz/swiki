@@ -1,4 +1,4 @@
-import urllib2
+import urllib
 from bs4 import BeautifulSoup
 import re
 #import codecs
@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/grab_article_en')
 def grab_random_article():
-    wiki_page = BeautifulSoup(urllib2.urlopen('http://en.wikipedia.org/wiki/Special:Random').read())    
+    wiki_page = BeautifulSoup(urllib.request.urlopen('http://en.wikipedia.org/wiki/Special:Random').read())    
     header = wiki_page.find("h1")
     wiki_page = wiki_page.findAll(id='mw-content-text')
 
@@ -51,7 +51,7 @@ def grab_random_article():
 
 @app.route('/grab_article_es')
 def grab_random_article_es():
-    wiki_page = BeautifulSoup(urllib2.urlopen('https://es.wikipedia.org/wiki/Especial:Aleatoria').read())
+    wiki_page = BeautifulSoup(urllib.request.urlopen('https://es.wikipedia.org/wiki/Especial:Aleatoria').read())
     header = wiki_page.find("h1")
     wiki_page = wiki_page.findAll(id='mw-content-text')
     
