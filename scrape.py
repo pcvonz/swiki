@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/grab_article_en')
 def grab_random_article():
-    wiki_page = BeautifulSoup(urllib2.urlopen('http://en.wikipedia.org/wiki/Special:Random').read())
+    wiki_page = BeautifulSoup(urllib2.urlopen('http://en.wikipedia.org/wiki/Special:Random').read())    
     header = wiki_page.find("h1")
     wiki_page = wiki_page.findAll(id='mw-content-text')
 
