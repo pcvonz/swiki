@@ -3,8 +3,14 @@ var data;
 var font = 0
 time = new Date().getTime() / 1000;
 var sidebar;
+
+//languages
 var language = "en";
 var currentLanguage = "en";
+
+//Button to grab new article.
+var new_article = false;
+
 function draw() {    
     //If current index is undefined then the end of the article has been reached.
     //Grab another article.
@@ -17,6 +23,9 @@ function draw() {
         console.log("lang " + language);
         console.log("cur " +currentLanguage);
         getJson();
+    } else if(new_article == true) {
+        new_article = false;
+        getJson();
     } else {
             var textSpeed = document.getElementById('speed').value;
             currentLanguage = language;
@@ -24,9 +33,7 @@ function draw() {
             curr_time = new Date().getTime() / 1000;
             deltaTime = curr_time - time;
             var canvas = document.getElementById('Wikipedia');
-            
-            console.log(window.variable[0]);
-            
+                        
             
             if(canvas.getContext){
                 //Set up canvas
@@ -81,11 +88,16 @@ function getJson() {
         window.variable = data;
         window.sidebar = document.getElementById('sidebar');
         document.getElementById("article_title").innerHTML= data[0];
+        document.getElementById("link_to_article").href = "https://en.wikipedia.org/wiki/Special:Search?search=" + data[0];
         draw();
     }
     
 )
 };
+
+function grabNewArticle() {
+    new_article = true;
+}
 
 function start() {
     sidebar = document.getElementById('relative_sidebar');
