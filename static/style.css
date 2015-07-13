@@ -24,6 +24,7 @@ canvas#Wikipedia {
     float: left;
     height:100%;
     left:-300px;
+    width:301px;
 }
 
 #sidebar:hover {
@@ -35,8 +36,9 @@ canvas#Wikipedia {
 
 h1 {
     font: 20px "Linux Libertine O", serif;
-    margin: 2px 6px 5px 20px;
+    margin: 5px 6px 5px 20px;
     padding: 0px 6px 0px 1px;
+    padding-left: 3px;
 }
 
 .container-left {
@@ -51,6 +53,29 @@ h1 {
 }
 
 .menu {
-        font: 18px "Source Sans Pro", sans;
+    font: 18px "Source Sans Pro", sans;
     font-weight: 100;
+}
+
+img {
+    float: left;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration:none
+    color: black;
+}
+
+.block {
+    float: left;
+    width: 100%;
+}
+#new_article {
+    margin-top: 50px;
+    margin-left: 50px;
 }
